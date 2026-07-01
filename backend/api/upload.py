@@ -1,5 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from services.file_service import FileService
+from services.logger_service import logger
+import time
 
 router = APIRouter(
     prefix="/api",
@@ -15,25 +17,33 @@ ALLOWED_EXTENSIONS = (".csv", ".xlsx")
 
 @router.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
+    """
+    Upload a CSV or Excel dataset,
+    validate it, save it,
+    extract metadata,
+    and log the upload.
+    """
 
-    # Check if filename exists
+    start_time = time.time()
+
+    # Validate filename
     if not file.filename:
         raise HTTPException(
             status_code=400,
             detail="Filename is missing."
         )
 
-    # Validate extension
+    # Validate file extension
     if not file.filename.lower().endswith(ALLOWED_EXTENSIONS):
         raise HTTPException(
             status_code=400,
             detail="Only CSV and Excel (.xlsx) files are allowed."
         )
 
-    # Read file into memory
+    # Read uploaded file
     contents = await file.read()
 
-    # Check if file is empty
+    # Check empty file
     if len(contents) == 0:
         raise HTTPException(
             status_code=400,
@@ -50,11 +60,33 @@ async def upload_dataset(file: UploadFile = File(...)):
     # Reset file pointer
     file.file.seek(0)
 
-    # Save file
-    result = FileService.save_file(file)
+    try:
+        # Save file and extract metadata
+        result = FileService.save_file(file)
 
-    return {
-        "success": True,
-        "message": "Dataset uploaded successfully.",
-        "data": result
-    }
+        processing_time = round(time.time() - start_time, 2)
+
+        logger.info(
+            f"Upload Successful | "
+            f"File={file.filename} | "
+            f"Time={processing_time} sec"
+        )
+
+        return {
+            "success": True,
+            "message": "Dataset uploaded successfully.",
+            "data": result
+        }
+
+    except Exception as e:
+
+        logger.error(
+            f"Upload Failed | "
+            f"File={file.filename} | "
+            f"Error={str(e)}"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
