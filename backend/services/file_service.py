@@ -1,7 +1,8 @@
 import os
 import shutil
-import pandas as pd
 from datetime import datetime
+
+import pandas as pd
 
 UPLOAD_FOLDER = "uploads"
 
@@ -39,12 +40,12 @@ class FileService:
             df = pd.read_excel(filepath)
 
         else:
-            raise ValueError("Unsupported file format.")
+            raise ValueError("Unsupported file format")
 
         metadata = {
-            "rows": len(df),
-            "columns": len(df.columns),
-            "column_names": list(df.columns),
+            "rows": int(df.shape[0]),
+            "columns": int(df.shape[1]),
+            "column_names": df.columns.tolist(),
             "data_types": {
                 column: str(dtype)
                 for column, dtype in df.dtypes.items()
@@ -53,6 +54,10 @@ class FileService:
             "duplicate_rows": int(df.duplicated().sum()),
             "memory_usage_kb": round(
                 df.memory_usage(deep=True).sum() / 1024,
+                2
+            ),
+            "file_size_mb": round(
+                os.path.getsize(filepath) / (1024 * 1024),
                 2
             )
         }
