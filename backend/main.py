@@ -9,9 +9,11 @@ app = FastAPI(
 
 app.include_router(upload_router)
 
+
 @app.get("/")
 def home():
     return {
         "project": "InsightIQ",
-        "message": "Backend Running Successfully 🚀"
+        "status": "Running",
+        "message": "Welcome to InsightIQ 🚀"
     }

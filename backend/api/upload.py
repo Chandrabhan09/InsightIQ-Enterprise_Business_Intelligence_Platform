@@ -11,6 +11,9 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 @router.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
+    """
+    Upload a CSV or Excel dataset.
+    """
 
     # Check filename
     if not file.filename:
@@ -19,7 +22,7 @@ async def upload_dataset(file: UploadFile = File(...)):
             detail="Filename is missing."
         )
 
-    # Check extension
+    # Validate extension
     allowed_extensions = (".csv", ".xlsx")
 
     if not file.filename.lower().endswith(allowed_extensions):
@@ -28,24 +31,27 @@ async def upload_dataset(file: UploadFile = File(...)):
             detail="Only CSV and Excel files are allowed."
         )
 
-    # Check file size
+    # Read uploaded file
     contents = await file.read()
 
+    # Check empty file
     if len(contents) == 0:
         raise HTTPException(
             status_code=400,
             detail="Uploaded file is empty."
         )
 
+    # Check maximum file size
     if len(contents) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=400,
             detail="File size exceeds 10 MB."
         )
 
-    # Reset file pointer
+    # Reset pointer after reading
     file.file.seek(0)
 
+    # Save file and extract metadata
     result = FileService.save_file(file)
 
     return {
