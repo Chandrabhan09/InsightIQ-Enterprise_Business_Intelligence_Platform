@@ -6,16 +6,17 @@ router = APIRouter(
     tags=["File Upload"]
 )
 
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+# Maximum upload size (10 MB)
+MAX_FILE_SIZE = 10 * 1024 * 1024
+
+# Allowed file extensions
+ALLOWED_EXTENSIONS = (".csv", ".xlsx")
 
 
 @router.post("/upload")
 async def upload_dataset(file: UploadFile = File(...)):
-    """
-    Upload a CSV or Excel dataset.
-    """
 
-    # Check filename
+    # Check if filename exists
     if not file.filename:
         raise HTTPException(
             status_code=400,
@@ -23,39 +24,37 @@ async def upload_dataset(file: UploadFile = File(...)):
         )
 
     # Validate extension
-    allowed_extensions = (".csv", ".xlsx")
-
-    if not file.filename.lower().endswith(allowed_extensions):
+    if not file.filename.lower().endswith(ALLOWED_EXTENSIONS):
         raise HTTPException(
             status_code=400,
-            detail="Only CSV and Excel files are allowed."
+            detail="Only CSV and Excel (.xlsx) files are allowed."
         )
 
-    # Read uploaded file
+    # Read file into memory
     contents = await file.read()
 
-    # Check empty file
+    # Check if file is empty
     if len(contents) == 0:
         raise HTTPException(
             status_code=400,
             detail="Uploaded file is empty."
         )
 
-    # Check maximum file size
+    # Validate file size
     if len(contents) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=400,
             detail="File size exceeds 10 MB."
         )
 
-    # Reset pointer after reading
+    # Reset file pointer
     file.file.seek(0)
 
-    # Save file and extract metadata
+    # Save file
     result = FileService.save_file(file)
 
     return {
         "success": True,
-        "message": "File uploaded successfully.",
+        "message": "Dataset uploaded successfully.",
         "data": result
     }
