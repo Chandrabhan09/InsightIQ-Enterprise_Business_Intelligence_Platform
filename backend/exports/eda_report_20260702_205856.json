@@ -1,0 +1,630 @@
+{
+    "overview": {
+        "dataset_information": {
+            "total_rows": 17966,
+            "total_columns": 9,
+            "shape": [
+                17966,
+                9
+            ],
+            "memory_usage_mb": 3.67
+        },
+        "quality_summary": {
+            "total_missing_values": 0,
+            "duplicate_rows": 154
+        },
+        "columns": {
+            "column_names": [
+                "model",
+                "year",
+                "price",
+                "transmission",
+                "mileage",
+                "fuelType",
+                "tax",
+                "mpg",
+                "engineSize"
+            ],
+            "data_types": {
+                "model": "str",
+                "year": "int64",
+                "price": "int64",
+                "transmission": "str",
+                "mileage": "int64",
+                "fuelType": "str",
+                "tax": "int64",
+                "mpg": "float64",
+                "engineSize": "float64"
+            },
+            "numerical_columns": [
+                "year",
+                "price",
+                "mileage",
+                "tax",
+                "mpg",
+                "engineSize"
+            ],
+            "categorical_columns": [
+                "model",
+                "transmission",
+                "fuelType"
+            ]
+        }
+    },
+    "missing_analysis": {
+        "summary": {
+            "total_missing_values": 0,
+            "columns_with_missing_values": 0,
+            "data_quality_score": 100.0
+        },
+        "missing_values": {
+            "model": 0,
+            "year": 0,
+            "price": 0,
+            "transmission": 0,
+            "mileage": 0,
+            "fuelType": 0,
+            "tax": 0,
+            "mpg": 0,
+            "engineSize": 0
+        },
+        "missing_percentage": {
+            "model": 0.0,
+            "year": 0.0,
+            "price": 0.0,
+            "transmission": 0.0,
+            "mileage": 0.0,
+            "fuelType": 0.0,
+            "tax": 0.0,
+            "mpg": 0.0,
+            "engineSize": 0.0
+        },
+        "missing_ranking": {}
+    },
+    "duplicate_analysis": {
+        "summary": {
+            "total_rows": 17966,
+            "duplicate_rows": 154,
+            "unique_rows": 17812,
+            "duplicate_percentage": 0.86,
+            "uniqueness_score": 99.14
+        },
+        "duplicate_status": "Duplicates Found",
+        "sample_duplicates": [
+            {
+                "model": " Focus",
+                "year": 2016,
+                "price": 10995,
+                "transmission": "Manual",
+                "mileage": 30923,
+                "fuelType": "Diesel",
+                "tax": 0,
+                "mpg": 74.3,
+                "engineSize": 1.5
+            },
+            {
+                "model": " Focus",
+                "year": 2019,
+                "price": 14998,
+                "transmission": "Manual",
+                "mileage": 7000,
+                "fuelType": "Petrol",
+                "tax": 145,
+                "mpg": 58.9,
+                "engineSize": 1.0
+            },
+            {
+                "model": " Focus",
+                "year": 2019,
+                "price": 14998,
+                "transmission": "Manual",
+                "mileage": 7000,
+                "fuelType": "Petrol",
+                "tax": 145,
+                "mpg": 58.9,
+                "engineSize": 1.0
+            },
+            {
+                "model": " EcoSport",
+                "year": 2019,
+                "price": 15489,
+                "transmission": "Manual",
+                "mileage": 5636,
+                "fuelType": "Diesel",
+                "tax": 145,
+                "mpg": 68.9,
+                "engineSize": 1.5
+            },
+            {
+                "model": " Grand Tourneo Connect",
+                "year": 2019,
+                "price": 19999,
+                "transmission": "Manual",
+                "mileage": 3500,
+                "fuelType": "Diesel",
+                "tax": 145,
+                "mpg": 61.4,
+                "engineSize": 1.5
+            }
+        ]
+    },
+    "column_classification": {
+        "model": {
+            "data_type": "str",
+            "classification": "Categorical",
+            "unique_values": 24,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "year": {
+            "data_type": "int64",
+            "classification": "Numerical",
+            "unique_values": 23,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "price": {
+            "data_type": "int64",
+            "classification": "Numerical",
+            "unique_values": 3511,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "transmission": {
+            "data_type": "str",
+            "classification": "Categorical",
+            "unique_values": 3,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "mileage": {
+            "data_type": "int64",
+            "classification": "Numerical",
+            "unique_values": 13528,
+            "missing_values": 0,
+            "cardinality": "High"
+        },
+        "fuelType": {
+            "data_type": "str",
+            "classification": "Categorical",
+            "unique_values": 5,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "tax": {
+            "data_type": "int64",
+            "classification": "Numerical",
+            "unique_values": 36,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "mpg": {
+            "data_type": "float64",
+            "classification": "Numerical",
+            "unique_values": 90,
+            "missing_values": 0,
+            "cardinality": "Low"
+        },
+        "engineSize": {
+            "data_type": "float64",
+            "classification": "Numerical",
+            "unique_values": 16,
+            "missing_values": 0,
+            "cardinality": "Low"
+        }
+    },
+    "distribution_analysis": {
+        "year": {
+            "count": 17966,
+            "mean": 2016.87,
+            "median": 2017.0,
+            "std": 2.05,
+            "minimum": 1996.0,
+            "maximum": 2060.0,
+            "skewness": -1.2826,
+            "kurtosis": 17.0355,
+            "distribution": "Left Skewed"
+        },
+        "price": {
+            "count": 17966,
+            "mean": 12279.53,
+            "median": 11291.0,
+            "std": 4741.34,
+            "minimum": 495.0,
+            "maximum": 54995.0,
+            "skewness": 1.0965,
+            "kurtosis": 3.2615,
+            "distribution": "Right Skewed"
+        },
+        "mileage": {
+            "count": 17966,
+            "mean": 23362.61,
+            "median": 18242.5,
+            "std": 19472.05,
+            "minimum": 1.0,
+            "maximum": 177644.0,
+            "skewness": 1.8421,
+            "kurtosis": 4.9956,
+            "distribution": "Right Skewed"
+        },
+        "tax": {
+            "count": 17966,
+            "mean": 113.33,
+            "median": 145.0,
+            "std": 62.01,
+            "minimum": 0.0,
+            "maximum": 580.0,
+            "skewness": -0.5641,
+            "kurtosis": 1.3129,
+            "distribution": "Left Skewed"
+        },
+        "mpg": {
+            "count": 17966,
+            "mean": 57.91,
+            "median": 58.9,
+            "std": 10.13,
+            "minimum": 20.8,
+            "maximum": 201.8,
+            "skewness": 0.6039,
+            "kurtosis": 11.4382,
+            "distribution": "Right Skewed"
+        },
+        "engineSize": {
+            "count": 17966,
+            "mean": 1.35,
+            "median": 1.2,
+            "std": 0.43,
+            "minimum": 0.0,
+            "maximum": 5.0,
+            "skewness": 1.8931,
+            "kurtosis": 11.2937,
+            "distribution": "Right Skewed"
+        }
+    },
+    "categorical_analysis": {
+        "model": {
+            "unique_values": 24,
+            "mode": " Fiesta",
+            "mode_frequency": 6557,
+            "cardinality": "Low",
+            "top_categories": {
+                " Fiesta": {
+                    "count": 6557,
+                    "percentage": 36.5
+                },
+                " Focus": {
+                    "count": 4588,
+                    "percentage": 25.54
+                },
+                " Kuga": {
+                    "count": 2225,
+                    "percentage": 12.38
+                },
+                " EcoSport": {
+                    "count": 1143,
+                    "percentage": 6.36
+                },
+                " C-MAX": {
+                    "count": 543,
+                    "percentage": 3.02
+                },
+                " Ka+": {
+                    "count": 531,
+                    "percentage": 2.96
+                },
+                " Mondeo": {
+                    "count": 526,
+                    "percentage": 2.93
+                },
+                " B-MAX": {
+                    "count": 355,
+                    "percentage": 1.98
+                },
+                " S-MAX": {
+                    "count": 296,
+                    "percentage": 1.65
+                },
+                " Grand C-MAX": {
+                    "count": 247,
+                    "percentage": 1.37
+                }
+            }
+        },
+        "transmission": {
+            "unique_values": 3,
+            "mode": "Manual",
+            "mode_frequency": 15518,
+            "cardinality": "Low",
+            "top_categories": {
+                "Manual": {
+                    "count": 15518,
+                    "percentage": 86.37
+                },
+                "Automatic": {
+                    "count": 1361,
+                    "percentage": 7.58
+                },
+                "Semi-Auto": {
+                    "count": 1087,
+                    "percentage": 6.05
+                }
+            }
+        },
+        "fuelType": {
+            "unique_values": 5,
+            "mode": "Petrol",
+            "mode_frequency": 12179,
+            "cardinality": "Low",
+            "top_categories": {
+                "Petrol": {
+                    "count": 12179,
+                    "percentage": 67.79
+                },
+                "Diesel": {
+                    "count": 5762,
+                    "percentage": 32.07
+                },
+                "Hybrid": {
+                    "count": 22,
+                    "percentage": 0.12
+                },
+                "Electric": {
+                    "count": 2,
+                    "percentage": 0.01
+                },
+                "Other": {
+                    "count": 1,
+                    "percentage": 0.01
+                }
+            }
+        }
+    },
+    "correlation_analysis": {
+        "correlation_matrix": {
+            "year": {
+                "year": 1.0,
+                "price": 0.636,
+                "mileage": -0.7078,
+                "tax": 0.2985,
+                "mpg": -0.023,
+                "engineSize": -0.1373
+            },
+            "price": {
+                "year": 0.636,
+                "price": 1.0,
+                "mileage": -0.5307,
+                "tax": 0.4069,
+                "mpg": -0.3464,
+                "engineSize": 0.4112
+            },
+            "mileage": {
+                "year": -0.7078,
+                "price": -0.5307,
+                "mileage": 1.0,
+                "tax": -0.2605,
+                "mpg": 0.1201,
+                "engineSize": 0.215
+            },
+            "tax": {
+                "year": 0.2985,
+                "price": 0.4069,
+                "mileage": -0.2605,
+                "tax": 1.0,
+                "mpg": -0.503,
+                "engineSize": 0.1844
+            },
+            "mpg": {
+                "year": -0.023,
+                "price": -0.3464,
+                "mileage": 0.1201,
+                "tax": -0.503,
+                "mpg": 1.0,
+                "engineSize": -0.2605
+            },
+            "engineSize": {
+                "year": -0.1373,
+                "price": 0.4112,
+                "mileage": 0.215,
+                "tax": 0.1844,
+                "mpg": -0.2605,
+                "engineSize": 1.0
+            }
+        },
+        "summary": {
+            "strong_positive": [],
+            "strong_negative": [
+                {
+                    "feature_1": "year",
+                    "feature_2": "mileage",
+                    "correlation": -0.7078
+                }
+            ],
+            "weak_correlations": [
+                {
+                    "feature_1": "year",
+                    "feature_2": "tax",
+                    "correlation": 0.2985
+                },
+                {
+                    "feature_1": "year",
+                    "feature_2": "mpg",
+                    "correlation": -0.023
+                },
+                {
+                    "feature_1": "year",
+                    "feature_2": "engineSize",
+                    "correlation": -0.1373
+                },
+                {
+                    "feature_1": "mileage",
+                    "feature_2": "tax",
+                    "correlation": -0.2605
+                },
+                {
+                    "feature_1": "mileage",
+                    "feature_2": "mpg",
+                    "correlation": 0.1201
+                },
+                {
+                    "feature_1": "mileage",
+                    "feature_2": "engineSize",
+                    "correlation": 0.215
+                },
+                {
+                    "feature_1": "tax",
+                    "feature_2": "engineSize",
+                    "correlation": 0.1844
+                },
+                {
+                    "feature_1": "mpg",
+                    "feature_2": "engineSize",
+                    "correlation": -0.2605
+                }
+            ]
+        }
+    },
+    "outlier_analysis": {
+        "year": {
+            "q1": 2016.0,
+            "q3": 2018.0,
+            "iqr": 2.0,
+            "lower_bound": 2013.0,
+            "upper_bound": 2021.0,
+            "outlier_count": 499,
+            "outlier_percentage": 2.78,
+            "sample_outliers": [
+                2012.0,
+                2008.0,
+                2010.0,
+                2012.0,
+                2009.0,
+                2012.0,
+                2011.0,
+                2011.0,
+                2008.0,
+                2012.0
+            ]
+        },
+        "price": {
+            "q1": 8999.0,
+            "q3": 15299.0,
+            "iqr": 6300.0,
+            "lower_bound": -451.0,
+            "upper_bound": 24749.0,
+            "outlier_count": 286,
+            "outlier_percentage": 1.59,
+            "sample_outliers": [
+                25500.0,
+                24995.0,
+                34498.0,
+                42489.0,
+                38489.0,
+                29998.0,
+                31498.0,
+                24999.0,
+                39998.0,
+                24995.0
+            ]
+        },
+        "mileage": {
+            "q1": 9987.0,
+            "q3": 31060.0,
+            "iqr": 21073.0,
+            "lower_bound": -21622.5,
+            "upper_bound": 62669.5,
+            "outlier_count": 878,
+            "outlier_percentage": 4.89,
+            "sample_outliers": [
+                74128.0,
+                79300.0,
+                85000.0,
+                67895.0,
+                64612.0,
+                66937.0,
+                78170.0,
+                63508.0,
+                79125.0,
+                78636.0
+            ]
+        },
+        "tax": {
+            "q1": 30.0,
+            "q3": 145.0,
+            "iqr": 115.0,
+            "lower_bound": -142.5,
+            "upper_bound": 317.5,
+            "outlier_count": 20,
+            "outlier_percentage": 0.11,
+            "sample_outliers": [
+                570.0,
+                580.0,
+                570.0,
+                570.0,
+                570.0,
+                570.0,
+                580.0,
+                570.0,
+                555.0,
+                325.0
+            ]
+        },
+        "mpg": {
+            "q1": 52.3,
+            "q3": 65.7,
+            "iqr": 13.4,
+            "lower_bound": 32.2,
+            "upper_bound": 85.8,
+            "outlier_count": 216,
+            "outlier_percentage": 1.2,
+            "sample_outliers": [
+                31.7,
+                31.0,
+                22.1,
+                30.7,
+                28.8,
+                23.5,
+                23.5,
+                29.1,
+                22.6,
+                31.7
+            ]
+        },
+        "engineSize": {
+            "q1": 1.0,
+            "q3": 1.5,
+            "iqr": 0.5,
+            "lower_bound": 0.25,
+            "upper_bound": 2.25,
+            "outlier_count": 190,
+            "outlier_percentage": 1.06,
+            "sample_outliers": [
+                2.3,
+                5.0,
+                2.3,
+                2.3,
+                5.0,
+                5.0,
+                5.0,
+                5.0,
+                2.3,
+                2.3
+            ]
+        }
+    },
+    "business_insights": {
+        "business_insights": [
+            "The dataset contains 17966 rows and 9 columns.",
+            "Excellent data quality. No missing values were detected.",
+            "154 duplicate rows were detected. Consider removing them before modeling.",
+            "The dataset contains 6 numerical features.",
+            "The dataset contains 3 categorical features.",
+            "The dataset is well suited for statistical analysis and machine learning.",
+            "Categorical features can be encoded for predictive modeling."
+        ],
+        "recommendations": [
+            "Remove duplicate records to improve data quality.",
+            "Perform feature engineering before model training.",
+            "Normalize or standardize numerical features when required."
+        ]
+    }
+}

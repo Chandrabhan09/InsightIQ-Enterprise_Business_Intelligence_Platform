@@ -303,6 +303,7 @@ def generate_numerical_report(
             status_code=400,
             detail=str(e)
         )
+    
 @router.get("/visualize")
 def visualize(
     filepath: str = Query(...),
