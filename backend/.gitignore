@@ -1,7 +1,27 @@
+# Virtual Environment
 venv/
+
+# Python Cache
 __pycache__/
 *.pyc
-.env
+
+# Uploaded Files
 uploads/
+
+# Generated Charts
+charts/
+
+# Generated Reports
+reports/
+
+# macOS
 .DS_Store
-.vscode/settings.json
+
+# VS Code
+.vscode/ 
+__pycache__/
+*.py[cod]
+logs/
+*.log
+venv/
+.env

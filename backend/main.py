@@ -1,19 +1,14 @@
 from fastapi import FastAPI
-from api.upload import router as upload_router
+
+from api.profile import router as profile_router
+from api.visualization import router as visualization_router
+from api.numerical import router as numerical_router
 
 app = FastAPI(
-    title="InsightIQ",
-    description="Enterprise Business Intelligence Platform",
+    title="InsightIQ API",
     version="1.0.0"
 )
 
-app.include_router(upload_router)
-
-
-@app.get("/")
-def home():
-    return {
-        "project": "InsightIQ",
-        "status": "Running",
-        "message": "Welcome to InsightIQ 🚀"
-    }
+app.include_router(profile_router)
+app.include_router(visualization_router)
+app.include_router(numerical_router)
