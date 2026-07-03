@@ -5,12 +5,25 @@ from api.numerical import router as numerical_router
 from api.eda import router as eda_router
 from api.statistics import router as statistics_router
 from api.preprocessing import router as preprocessing_router
+from database.connection import engine
+from database.models import Base
+from api.database import router as database_router
+
+
+
+Base.metadata.create_all(bind=engine)
+
+
+
 
 app = FastAPI(title="InsightIQ API", version="1.0.0")
 
+
+app.include_router(database_router)
 app.include_router(profile_router)
 app.include_router(visualization_router)
 app.include_router(numerical_router)
 app.include_router(eda_router)
 app.include_router(statistics_router)
 app.include_router(preprocessing_router)
+app.include_router(database_router)
