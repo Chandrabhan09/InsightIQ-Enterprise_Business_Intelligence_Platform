@@ -20,7 +20,6 @@ class ProfileService:
 
         return df
 
-
     @staticmethod
     def dataset_summary(df):
 
@@ -29,9 +28,9 @@ class ProfileService:
             "columns": df.shape[1],
             "column_names": list(df.columns),
             "missing_values": int(df.isnull().sum().sum()),
-            "duplicate_rows": int(df.duplicated().sum())
+            "duplicate_rows": int(df.duplicated().sum()),
         }
-    
+
     @staticmethod
     def missing_value_analysis(df):
         """
@@ -40,22 +39,15 @@ class ProfileService:
 
         total_missing = int(df.isnull().sum().sum())
 
-        column_wise_missing = (
-            df.isnull()
-              .sum()
-              .to_dict()
-        )
+        column_wise_missing = df.isnull().sum().to_dict()
 
-        missing_percentage = (
-            (df.isnull().sum() / len(df)) * 100
-        ).round(2).to_dict()
+        missing_percentage = ((df.isnull().sum() / len(df)) * 100).round(2).to_dict()
 
         return {
             "total_missing_values": total_missing,
             "column_wise_missing": column_wise_missing,
-            "missing_percentage": missing_percentage
+            "missing_percentage": missing_percentage,
         }
-    
 
     @staticmethod
     def statistical_summary(df):
@@ -63,14 +55,10 @@ class ProfileService:
         Generate statistical summary for numeric columns.
         """
 
-        statistics = (
-            df.describe(include="number")
-              .round(2)
-              .to_dict()
-        )
+        statistics = df.describe(include="number").round(2).to_dict()
 
         return statistics
-    
+
     @staticmethod
     def missing_value_analysis(df):
         """
@@ -79,22 +67,15 @@ class ProfileService:
 
         total_missing = int(df.isnull().sum().sum())
 
-        column_wise_missing = (
-            df.isnull()
-              .sum()
-              .to_dict()
-        )
+        column_wise_missing = df.isnull().sum().to_dict()
 
-        missing_percentage = (
-            (df.isnull().sum() / len(df)) * 100
-        ).round(2).to_dict()
+        missing_percentage = ((df.isnull().sum() / len(df)) * 100).round(2).to_dict()
 
         return {
             "total_missing_values": total_missing,
             "column_wise_missing": column_wise_missing,
-            "missing_percentage": missing_percentage
+            "missing_percentage": missing_percentage,
         }
-    
 
     @staticmethod
     def duplicate_analysis(df):
@@ -106,24 +87,17 @@ class ProfileService:
 
         duplicate_rows = int(df.duplicated().sum())
 
-        duplicate_percentage = round(
-            (duplicate_rows / total_rows) * 100,
-            2
-        )
+        duplicate_percentage = round((duplicate_rows / total_rows) * 100, 2)
 
-        dataset_status = (
-            "Duplicates Found"
-            if duplicate_rows > 0
-            else "Clean Dataset"
-        )
+        dataset_status = "Duplicates Found" if duplicate_rows > 0 else "Clean Dataset"
 
         return {
             "total_rows": total_rows,
             "duplicate_rows": duplicate_rows,
             "duplicate_percentage": duplicate_percentage,
-            "dataset_status": dataset_status
+            "dataset_status": dataset_status,
         }
-    
+
     @staticmethod
     def data_type_analysis(df):
         """
@@ -135,21 +109,13 @@ class ProfileService:
         for column in df.columns:
             data_types[column] = str(df[column].dtype)
 
-        numeric_columns = len(
-            df.select_dtypes(include="number").columns
-        )
+        numeric_columns = len(df.select_dtypes(include="number").columns)
 
-        categorical_columns = len(
-            df.select_dtypes(include="object").columns
-        )
+        categorical_columns = len(df.select_dtypes(include="object").columns)
 
-        boolean_columns = len(
-            df.select_dtypes(include="bool").columns
-        )
+        boolean_columns = len(df.select_dtypes(include="bool").columns)
 
-        datetime_columns = len(
-            df.select_dtypes(include="datetime").columns
-        )
+        datetime_columns = len(df.select_dtypes(include="datetime").columns)
 
         return {
             "total_columns": len(df.columns),
@@ -157,9 +123,9 @@ class ProfileService:
             "categorical_columns": categorical_columns,
             "boolean_columns": boolean_columns,
             "datetime_columns": datetime_columns,
-            "column_data_types": data_types
+            "column_data_types": data_types,
         }
-    
+
     @staticmethod
     def correlation_analysis(df):
         """
@@ -168,16 +134,10 @@ class ProfileService:
 
         numeric_df = df.select_dtypes(include="number")
 
-        correlation_matrix = (
-            numeric_df.corr()
-            .round(2)
-            .to_dict()
-        )
+        correlation_matrix = numeric_df.corr().round(2).to_dict()
 
-        return {
-            "correlation_matrix": correlation_matrix
-        }
-    
+        return {"correlation_matrix": correlation_matrix}
+
     @staticmethod
     def outlier_analysis(df):
         """
@@ -201,15 +161,13 @@ class ProfileService:
             upper_limit = Q3 + (1.5 * IQR)
 
             outliers = numeric_df[
-                (numeric_df[column] < lower_limit) |
-                (numeric_df[column] > upper_limit)
+                (numeric_df[column] < lower_limit) | (numeric_df[column] > upper_limit)
             ]
 
             outlier_summary[column] = len(outliers)
 
-        return {
-            "outlier_summary": outlier_summary
-        }
+        return {"outlier_summary": outlier_summary}
+
     @staticmethod
     def business_insights(df):
         """
@@ -229,9 +187,7 @@ class ProfileService:
         if total_missing == 0:
             insights.append("No missing values detected.")
         else:
-            insights.append(
-                f"{total_missing} missing values detected."
-            )
+            insights.append(f"{total_missing} missing values detected.")
 
         # Duplicate Rows
         duplicate_rows = int(df.duplicated().sum())
@@ -239,16 +195,12 @@ class ProfileService:
         if duplicate_rows == 0:
             insights.append("No duplicate rows found.")
         else:
-            insights.append(
-                f"{duplicate_rows} duplicate rows found."
-            )
+            insights.append(f"{duplicate_rows} duplicate rows found.")
 
         # Numeric Columns
         numeric_df = df.select_dtypes(include="number")
 
-        insights.append(
-            f"{len(numeric_df.columns)} numeric columns detected."
-        )
+        insights.append(f"{len(numeric_df.columns)} numeric columns detected.")
 
         # Highest Average Column
         means = numeric_df.mean(numeric_only=True)
@@ -261,10 +213,8 @@ class ProfileService:
             f"{highest_column} has the highest average value ({highest_value})."
         )
 
-        return {
-            "business_insights": insights
-        }
-    
+        return {"business_insights": insights}
+
     @staticmethod
     def export_report(df):
         """
@@ -274,31 +224,14 @@ class ProfileService:
         os.makedirs("reports", exist_ok=True)
 
         report = {
-            "dataset_summary": {
-                "rows": len(df),
-                "columns": len(df.columns)
-            },
-
-            "statistical_summary":
-                ProfileService.statistical_summary(df),
-
-            "missing_value_analysis":
-                ProfileService.missing_value_analysis(df),
-
-            "duplicate_analysis":
-                ProfileService.duplicate_analysis(df),
-
-            "data_type_analysis":
-                ProfileService.data_type_analysis(df),
-
-            "correlation_analysis":
-                ProfileService.correlation_analysis(df),
-
-            "outlier_analysis":
-                ProfileService.outlier_analysis(df),
-
-            "business_insights":
-                ProfileService.business_insights(df)
+            "dataset_summary": {"rows": len(df), "columns": len(df.columns)},
+            "statistical_summary": ProfileService.statistical_summary(df),
+            "missing_value_analysis": ProfileService.missing_value_analysis(df),
+            "duplicate_analysis": ProfileService.duplicate_analysis(df),
+            "data_type_analysis": ProfileService.data_type_analysis(df),
+            "correlation_analysis": ProfileService.correlation_analysis(df),
+            "outlier_analysis": ProfileService.outlier_analysis(df),
+            "business_insights": ProfileService.business_insights(df),
         }
 
         report_path = "reports/profile_report.json"
@@ -308,6 +241,5 @@ class ProfileService:
 
         return {
             "message": "Enterprise report generated successfully.",
-            "report_path": report_path
+            "report_path": report_path,
         }
-    

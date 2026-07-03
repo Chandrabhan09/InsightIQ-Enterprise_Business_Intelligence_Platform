@@ -29,11 +29,7 @@ class FileService:
 
         metadata = FileService.extract_metadata(filepath)
 
-        return {
-            "filename": filename,
-            "filepath": filepath,
-            "metadata": metadata
-        }
+        return {"filename": filename, "filepath": filepath, "metadata": metadata}
 
     @staticmethod
     def read_dataframe(filepath):
@@ -62,28 +58,13 @@ class FileService:
             "rows": int(df.shape[0]),
             "columns": int(df.shape[1]),
             "column_names": df.columns.tolist(),
-
-            "data_types": {
-                column: str(dtype)
-                for column, dtype in df.dtypes.items()
-            },
-
+            "data_types": {column: str(dtype) for column, dtype in df.dtypes.items()},
             "missing_values": {
-                column: int(value)
-                for column, value in df.isnull().sum().items()
+                column: int(value) for column, value in df.isnull().sum().items()
             },
-
             "duplicate_rows": int(df.duplicated().sum()),
-
-            "memory_usage_kb": round(
-                df.memory_usage(deep=True).sum() / 1024,
-                2
-            ),
-
-            "file_size_mb": round(
-                os.path.getsize(filepath) / (1024 * 1024),
-                2
-            )
+            "memory_usage_kb": round(df.memory_usage(deep=True).sum() / 1024, 2),
+            "file_size_mb": round(os.path.getsize(filepath) / (1024 * 1024), 2),
         }
 
         return metadata

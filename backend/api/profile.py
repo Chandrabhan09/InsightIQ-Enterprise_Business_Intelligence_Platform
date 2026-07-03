@@ -2,17 +2,12 @@ from fastapi import APIRouter, Query, HTTPException
 from services.profile_service import ProfileService
 import os
 
-router = APIRouter(
-    prefix="/api/profile",
-    tags=["Data Profiling"]
-)
+router = APIRouter(prefix="/api/profile", tags=["Data Profiling"])
 
 
 @router.get("/")
 def profile_home():
-    return {
-        "message": "Enterprise Data Profiling API is ready."
-    }
+    return {"message": "Enterprise Data Profiling API is ready."}
 
 
 @router.get("/summary")
@@ -22,10 +17,7 @@ def dataset_summary(filepath: str = Query(..., description="Path of uploaded dat
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
@@ -41,10 +33,7 @@ def missing_value_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
@@ -60,16 +49,14 @@ def statistical_summary(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     stats = ProfileService.statistical_summary(df)
 
     return stats
+
 
 @router.get("/missing-values")
 def missing_value_report(filepath: str = Query(...)):
@@ -78,16 +65,14 @@ def missing_value_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.missing_value_analysis(df)
 
     return report
+
 
 @router.get("/duplicates")
 def duplicate_report(filepath: str = Query(...)):
@@ -96,16 +81,14 @@ def duplicate_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.duplicate_analysis(df)
 
     return report
+
 
 @router.get("/data-types")
 def data_type_report(filepath: str = Query(...)):
@@ -114,16 +97,14 @@ def data_type_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.data_type_analysis(df)
 
     return report
+
 
 @router.get("/correlation")
 def correlation_report(filepath: str = Query(...)):
@@ -132,16 +113,14 @@ def correlation_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.correlation_analysis(df)
 
     return report
+
 
 @router.get("/outliers")
 def outlier_report(filepath: str = Query(...)):
@@ -150,16 +129,15 @@ def outlier_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.outlier_analysis(df)
 
     return report
+
+
 @router.get("/business-insights")
 def business_insight_report(filepath: str = Query(...)):
     """
@@ -167,16 +145,14 @@ def business_insight_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 
     report = ProfileService.business_insights(df)
 
     return report
+
 
 @router.get("/export-report")
 def export_report(filepath: str = Query(...)):
@@ -185,10 +161,7 @@ def export_report(filepath: str = Query(...)):
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     df = ProfileService.load_dataframe(filepath)
 

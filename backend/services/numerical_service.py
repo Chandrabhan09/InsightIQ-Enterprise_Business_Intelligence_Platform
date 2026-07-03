@@ -20,9 +20,9 @@ class NumericalService:
         return {
             "service": "Numerical Computing Engine",
             "status": "Running",
-            "numpy_version": np.__version__
+            "numpy_version": np.__version__,
         }
-    
+
     @staticmethod
     def numerical_summary(df, column_name):
         """
@@ -46,11 +46,11 @@ class NumericalService:
             "maximum": round(float(np.max(data)), 2),
             "range": round(float(np.max(data) - np.min(data)), 2),
             "variance": round(float(np.var(data)), 2),
-            "standard_deviation": round(float(np.std(data)), 2)
+            "standard_deviation": round(float(np.std(data)), 2),
         }
 
         return summary
-    
+
     @staticmethod
     def percentile_summary(df, column_name):
         """
@@ -78,9 +78,9 @@ class NumericalService:
             "50th_percentile": round(float(median), 2),
             "75th_percentile": round(float(q3), 2),
             "90th_percentile": round(float(p90), 2),
-            "interquartile_range": round(float(q3 - q1), 2)
+            "interquartile_range": round(float(q3 - q1), 2),
         }
-    
+
     @staticmethod
     def advanced_statistics(df, column_name):
         """
@@ -110,13 +110,11 @@ class NumericalService:
             "column": column_name,
             "mean": round(float(mean), 2),
             "standard_deviation": round(float(std), 2),
-            "coefficient_of_variation": (
-                None if cv is None else round(float(cv), 2)
-            ),
+            "coefficient_of_variation": (None if cv is None else round(float(cv), 2)),
             "skewness": round(float(skewness), 4),
-            "kurtosis": round(float(kurtosis), 4)
+            "kurtosis": round(float(kurtosis), 4),
         }
-    
+
     @staticmethod
     def normalize_data(df, column_name, method="minmax"):
         """
@@ -152,23 +150,18 @@ class NumericalService:
             else:
                 digits = len(str(int(max_abs)))
 
-                normalized = data / (10 ** digits)
+                normalized = data / (10**digits)
 
         else:
-            raise ValueError(
-                "Method must be 'minmax' or 'decimal'."
-            )
+            raise ValueError("Method must be 'minmax' or 'decimal'.")
 
         return {
             "column": column_name,
             "method": method,
             "total_values": int(len(normalized)),
-            "normalized_values": [
-                round(float(value), 4)
-                for value in normalized[:20]
-            ]
+            "normalized_values": [round(float(value), 4) for value in normalized[:20]],
         }
-    
+
     @staticmethod
     def standardize_data(df, column_name):
         """
@@ -197,11 +190,10 @@ class NumericalService:
             "standard_deviation": round(float(std), 2),
             "total_values": int(len(standardized)),
             "standardized_values": [
-                round(float(value), 4)
-                for value in standardized[:20]
-            ]
+                round(float(value), 4) for value in standardized[:20]
+            ],
         }
-    
+
     @staticmethod
     def matrix_operations(df):
         """
@@ -226,9 +218,9 @@ class NumericalService:
             "multiplication_shape": list(multiplication.shape),
             "sample_matrix": matrix[:5].tolist(),
             "sample_transpose": transpose[:, :5].tolist(),
-            "sample_multiplication": multiplication.tolist()
+            "sample_multiplication": multiplication.tolist(),
         }
-    
+
     @staticmethod
     def linear_algebra_analysis(df):
         """
@@ -265,30 +257,16 @@ class NumericalService:
             inverse_result = "Matrix is singular. Inverse cannot be calculated."
 
         return {
-
             "matrix_size": list(square_matrix.shape),
-
             "rank": rank,
-
             "determinant": round(determinant, 4),
-
-            "eigen_values": [
-                round(float(value), 4)
-                for value in eigen_values
-            ],
-
+            "eigen_values": [round(float(value), 4) for value in eigen_values],
             "eigen_vectors": [
-                [
-                    round(float(item), 4)
-                    for item in row
-                ]
-                for row in eigen_vectors
+                [round(float(item), 4) for item in row] for row in eigen_vectors
             ],
-
-            "inverse": inverse_result
-
+            "inverse": inverse_result,
         }
-    
+
     @staticmethod
     def performance_benchmark(df, column_name):
         """
@@ -342,33 +320,22 @@ class NumericalService:
         pandas_sum_time = (time.perf_counter() - start) * 1000
 
         return {
-
             "column": column_name,
-
             "numpy": {
-
                 "mean_ms": round(numpy_mean_time, 6),
                 "std_ms": round(numpy_std_time, 6),
-                "sum_ms": round(numpy_sum_time, 6)
-
+                "sum_ms": round(numpy_sum_time, 6),
             },
-
             "pandas": {
-
                 "mean_ms": round(pandas_mean_time, 6),
                 "std_ms": round(pandas_std_time, 6),
-                "sum_ms": round(pandas_sum_time, 6)
-
+                "sum_ms": round(pandas_sum_time, 6),
             },
-
             "overall_faster": (
-                "NumPy"
-                if numpy_mean_time < pandas_mean_time
-                else "Pandas"
-            )
-
+                "NumPy" if numpy_mean_time < pandas_mean_time else "Pandas"
+            ),
         }
-    
+
     @staticmethod
     def generate_numerical_report(df, column_name):
         """
@@ -376,58 +343,29 @@ class NumericalService:
         """
 
         report = {
-
             "report_information": {
-
                 "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-
                 "column": column_name,
-
-                "total_rows": int(len(df))
-
+                "total_rows": int(len(df)),
             },
-
-            "numerical_summary":
-                NumericalService.numerical_summary(
-                    df,
-                    column_name
-                ),
-
-            "percentile_analysis":
-                NumericalService.percentile_summary(
-                    df,
-                    column_name
-                ),
-
-            "advanced_statistics":
-                NumericalService.advanced_statistics(
-                    df,
-                    column_name
-                ),
-
-            "normalization_preview":
-                NumericalService.normalize_data(
-                    df,
-                    column_name,
-                    "minmax"
-                ),
-
-            "standardization_preview":
-                NumericalService.standardize_data(
-                    df,
-                    column_name
-                ),
-
-            "performance_benchmark":
-                NumericalService.performance_benchmark(
-                    df,
-                    column_name
-                )
-
+            "numerical_summary": NumericalService.numerical_summary(df, column_name),
+            "percentile_analysis": NumericalService.percentile_summary(df, column_name),
+            "advanced_statistics": NumericalService.advanced_statistics(
+                df, column_name
+            ),
+            "normalization_preview": NumericalService.normalize_data(
+                df, column_name, "minmax"
+            ),
+            "standardization_preview": NumericalService.standardize_data(
+                df, column_name
+            ),
+            "performance_benchmark": NumericalService.performance_benchmark(
+                df, column_name
+            ),
         }
 
         return report
-    
+
     @staticmethod
     def generate_visualizations(df, column_name):
         """
@@ -480,5 +418,5 @@ class NumericalService:
             "message": "Visualization report generated successfully.",
             "histogram": str(histogram_path),
             "boxplot": str(boxplot_path),
-            "linechart": str(linechart_path)
+            "linechart": str(linechart_path),
         }

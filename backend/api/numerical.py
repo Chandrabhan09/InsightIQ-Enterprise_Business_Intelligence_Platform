@@ -5,10 +5,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from services.numerical_service import NumericalService
 
-router = APIRouter(
-    prefix="/api/numerical",
-    tags=["Numerical Computing"]
-)
+router = APIRouter(prefix="/api/numerical", tags=["Numerical Computing"])
 
 
 @router.get("/")
@@ -17,179 +14,121 @@ def numerical_home():
 
 
 @router.get("/summary")
-def numerical_summary(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def numerical_summary(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Generate numerical summary using NumPy.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
         df = pd.read_csv(filepath)
 
-        report = NumericalService.numerical_summary(
-            df,
-            column_name
-        )
+        report = NumericalService.numerical_summary(df, column_name)
 
         return report
 
     except ValueError as e:
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/percentiles")
-def percentile_summary(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def percentile_summary(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Generate percentile summary.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
         df = pd.read_csv(filepath)
 
-        report = NumericalService.percentile_summary(
-            df,
-            column_name
-        )
+        report = NumericalService.percentile_summary(df, column_name)
 
         return report
 
     except ValueError as e:
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )  
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.get("/advanced-statistics")
-def advanced_statistics(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def advanced_statistics(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Generate advanced statistical metrics.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
         df = pd.read_csv(filepath)
 
-        report = NumericalService.advanced_statistics(
-            df,
-            column_name
-        )
+        report = NumericalService.advanced_statistics(df, column_name)
 
         return report
 
     except ValueError as e:
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )  
-       
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/normalize")
 def normalize_data(
     filepath: str = Query(...),
     column_name: str = Query(...),
-    method: str = Query("minmax")
+    method: str = Query("minmax"),
 ):
     """
     Normalize numerical data.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
         df = pd.read_csv(filepath)
 
-        report = NumericalService.normalize_data(
-            df,
-            column_name,
-            method
-        )
+        report = NumericalService.normalize_data(df, column_name, method)
 
         return report
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/standardize")
-def standardize_data(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def standardize_data(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Standardize numerical data using Z-score.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
         df = pd.read_csv(filepath)
 
-        report = NumericalService.standardize_data(
-            df,
-            column_name
-        )
+        report = NumericalService.standardize_data(df, column_name)
 
         return report
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/matrix")
-def matrix_operations(
-    filepath: str = Query(...)
-):
+def matrix_operations(filepath: str = Query(...)):
     """
     Enterprise matrix operations.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
@@ -201,25 +140,18 @@ def matrix_operations(
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/linear-algebra")
-def linear_algebra(
-    filepath: str = Query(...)
-):
+def linear_algebra(filepath: str = Query(...)):
     """
     Enterprise Linear Algebra Analytics.
     """
 
     if not os.path.exists(filepath):
 
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
@@ -231,49 +163,35 @@ def linear_algebra(
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/performance")
-def performance_benchmark(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def performance_benchmark(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Compare NumPy and Pandas performance.
     """
 
     if not os.path.exists(filepath):
 
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
         df = pd.read_csv(filepath)
 
-        report = NumericalService.performance_benchmark(
-            df,
-            column_name
-        )
+        report = NumericalService.performance_benchmark(df, column_name)
 
         return report
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/report")
 def generate_numerical_report(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
+    filepath: str = Query(...), column_name: str = Query(...)
 ):
     """
     Generate complete numerical analytics report.
@@ -281,58 +199,38 @@ def generate_numerical_report(
 
     if not os.path.exists(filepath):
 
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
         df = pd.read_csv(filepath)
 
-        report = NumericalService.generate_numerical_report(
-            df,
-            column_name
-        )
+        report = NumericalService.generate_numerical_report(df, column_name)
 
         return report
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
-    
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.get("/visualize")
-def visualize(
-    filepath: str = Query(...),
-    column_name: str = Query(...)
-):
+def visualize(filepath: str = Query(...), column_name: str = Query(...)):
     """
     Generate numerical visualization charts.
     """
 
     if not os.path.exists(filepath):
-        raise HTTPException(
-            status_code=404,
-            detail="Dataset not found."
-        )
+        raise HTTPException(status_code=404, detail="Dataset not found.")
 
     try:
 
         df = pd.read_csv(filepath)
 
-        report = NumericalService.generate_visualizations(
-            df,
-            column_name
-        )
+        report = NumericalService.generate_visualizations(df, column_name)
 
         return report
 
     except ValueError as e:
 
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
+        raise HTTPException(status_code=400, detail=str(e))
